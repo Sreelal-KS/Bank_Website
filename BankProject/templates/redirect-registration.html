@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}Uco Bank-Registration Info{% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="content" style="position: absolute; top: 30%; left: 25%;">
+        <div class="content-head">
+            <h1 class="mb-0 site-logo" style="text-align: center; padding-bottom: 10px;">
+                <a href="{% url 'home' %}" class="h2 mb-0">Uco Bank<span class="text-primary">.</span></a>
+            </h1>
+        </div>
+        <div class="content-block">
+            <h4>Dear customer you need to fill the Customer Details form<br>
+                Press the button below</h4>
+            <a href="{% url 'userdetails' %}" class="btn btn-primary" style="position: relative; left: 30%;">Customer Details</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

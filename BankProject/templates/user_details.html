@@ -1,0 +1,97 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}Uco Bank-User details{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-frame-form">
+                <div class="form-group" style="width: 1000px; position: relative; left: 5%; right: auto;">
+                    <form method="post" class="p-5 bg-white">
+                        {% csrf_token %}
+                        <h1 class="mb-0 site-logo" style="text-align: center; padding-bottom: 10px;">
+                            <a href="{% url 'home' %}" class="h2 mb-0">Uco Bank<span class="text-primary">.</span></a>
+                        </h1>
+                        {{form.as_p}}
+                        <select id="subject" class="form-control">
+                            <option selected>Select Your District</option>
+                        </select><br>
+                        <select id="topic" class="form-control">
+                            <option selected>Select Branch</option>
+                        </select><br>
+                        <div class="row form-group">
+                            <div class="col-md-5">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                            <div class="col-md-7">
+                                {% for m in messages %}
+                                <h4>{{m}} <span><a href="{% url 'home' %}">Goto Home</a></span></h4>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+    var subjectObject = {
+      "Thiruvananthapuram": [
+        "Kowdiar",
+        "Pattom",
+        "Nedumangad"
+      ],
+
+      "Kollam": [
+        "Chadayamangalam",
+        "Chavara",
+        "Kulathupuzha"
+        ],
+
+       "Ernakulam": [
+        "Kochi",
+        "Kadavanthra",
+        "Edapally"
+        ],
+
+      "Palakkad": [
+        "Edathanattukara",
+        "Civil Station ‑ Palakkad",
+        "Elappully"
+        ],
+
+    },
+    topicDefaultOption = new Option("Please select subject first", "");
+
+    window.onload = function() {
+      var subjectSel = document.getElementById("subject");
+      var topicSel = document.getElementById("topic");
+
+      for (var x in subjectObject) {
+        subjectSel.options[subjectSel.options.length] = new Option(x, x);
+      }
+      subjectSel.onchange = function() {
+        //empty Chapters- and Topics- dropdowns
+        topicSel.length = 0;
+        //chapterSel.length = 1; //not found :(
+
+        if(this.value === "") {
+          topicSel.options.add(topicDefaultOption);
+        } else {
+          //display correct values
+          for (var y in subjectObject[this.value]) {
+            topicSel.options.add(new Option(subjectObject[this.value][y], y));
+          }
+        }
+      }
+    }
+
+</script>
+{% endblock %}
+
+
